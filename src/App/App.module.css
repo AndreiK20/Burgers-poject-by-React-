@@ -1,0 +1,15 @@
+.App {
+  display: flex;
+  background-color:#131316;
+  max-height: 1280px;
+}
+.General {
+  display: flex;
+  justify-content: center;
+}
+.Center {
+  display: flex;
+  width: 1240px;
+  column-gap: 40px;
+
+}

@@ -1,0 +1,31 @@
+.General {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  border: 1px solid #4C4CFF;
+}
+.Lists {
+  width: 1240px;
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  justify-content: space-between;
+  padding-left: 0;
+}
+
+.Container {
+  display: flex;
+  column-gap: 8px;
+  text-decoration: none;
+}
+.Item{
+  display: flex;
+  text-decoration: none;
+  color: #8585ad;
+}
+
+
+.Item:hover {
+	color: white;
+  cursor: pointer;
+}

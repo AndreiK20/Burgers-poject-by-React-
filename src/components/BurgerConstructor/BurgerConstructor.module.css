@@ -1,0 +1,54 @@
+
+.Section {
+	display: flex;
+	padding-top: 100px;
+  width: 600px;
+  height: 800px;
+  border: 1px solid #4c4cff;
+}
+
+.Element {
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	min-width: 0;
+	flex-wrap: nowrap;
+	margin-bottom: 10px;
+}
+.Column{
+  display: flex;
+  flex-direction: column;
+}
+
+.ElementUp {
+  display: flex;
+  align-self: flex-end;
+	cursor: pointer;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+
+.Lists {
+  display: flex;
+  flex-direction: column;
+	max-height: 440px;
+  overflow-y: scroll;
+  text-decoration: none;
+}
+
+.ElementBottom {
+  align-self: flex-end;
+	cursor: pointer;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+.Price {
+	display: flex;
+	flex-direction: row;
+	justify-content: end;
+	align-items: center;
+}
