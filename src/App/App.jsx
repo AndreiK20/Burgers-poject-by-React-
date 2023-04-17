@@ -13,7 +13,6 @@ const burgerLink = "https://norma.nomoreparties.space/api/ingredients";
 
 function App() {
   const [ingredients, setIngredient] = useState([]);
-  const [elementData, setElementData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const [modalContent, setModalContent] = useState();
 
@@ -23,12 +22,9 @@ function App() {
       .then((res) => setIngredient(res.data));
   }, []);
   const handleOpen = (element) => {
-    if(elementData !== {}){
-      setIsOpen(true)
-    } else {
-      setIsOpen(false)
-    }
-    setModalContent(<IngredientDetails data={ingredients} />)
+    console.log(element)
+    setIsOpen(true)
+    setModalContent(<IngredientDetails data={element} />)
     ;}
   const handleClose = () => setIsOpen(false);
    

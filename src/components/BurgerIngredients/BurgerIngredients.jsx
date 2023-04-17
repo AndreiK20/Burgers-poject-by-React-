@@ -47,7 +47,7 @@ export const BurgerIngredients = ({ handleOpen, data}) => {
           {data
             ?.filter((item) => item.type === "sauce")
             .map((element) => (
-                <li className={styles.Card} key={element.id } onClick={handleOpen}>
+                <li className={styles.Card} key={element.id } onClick={() => handleOpen(element)}>
                   <img src={element.image} className={styles.Image} alt="ингредиент"></img>
                   <div className={styles.Price}>
                     {element.price}
@@ -62,7 +62,7 @@ export const BurgerIngredients = ({ handleOpen, data}) => {
           {data
             ?.filter((item) => item.type === "main")
             .map((element) => (
-                <li className={styles.Card} key={element.id } onClick={handleOpen} >
+                <li className={styles.Card} key={element.id } onClick={() => handleOpen(element)} >
                   <img src={element.image} className={styles.Image} alt="ингредиент"></img>
                   <div className={styles.Price}>
                     {element.price}
