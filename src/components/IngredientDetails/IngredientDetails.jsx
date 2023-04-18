@@ -2,6 +2,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import styles from "./IngredientDetails.module.css";
 
 export const IngredientDetails = ({ data }) => {
+    console.log(data.image_large)
   return (
     <div className={styles.Component}>
       <h2 className={`  ${styles.Title} ${"text text_type_main-large"}`}> Детали Ингридиента</h2>

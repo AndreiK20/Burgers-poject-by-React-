@@ -2,8 +2,9 @@ import { useState } from "react";
 import styles from "./BurgerIngredients.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
 
-export const BurgerIngredients = ({ handleOpen, data}) => {
+export function BurgerIngredients({ handleOpenIngredients, data }) {
   const [current, setCurrent] = useState("one");
 
   return (
@@ -18,7 +19,11 @@ export const BurgerIngredients = ({ handleOpen, data}) => {
         <Tab value="two" active={current === "two"} onClick={setCurrent}>
           Соусы
         </Tab>
-        <Tab value="three" active={current === "three"} onClick={setCurrent}>
+        <Tab
+          value="three"
+          active={current === "three"}
+          onClick={setCurrent}
+        >
           Начинка
         </Tab>
       </div>
@@ -30,9 +35,13 @@ export const BurgerIngredients = ({ handleOpen, data}) => {
               <li
                 className={styles.Card}
                 key={element._id}
-                onClick={() => handleOpen(element)}
+                onClick={() => handleOpenIngredients(element)}
               >
-                <img src={element.image} className={styles.Image} alt="ингредиент"></img>
+                <img
+                  src={element.image}
+                  className={styles.Image}
+                  alt="ингредиент"
+                ></img>
                 <div className={styles.Price}>
                   {element.price}
                   <CurrencyIcon />
@@ -47,14 +56,22 @@ export const BurgerIngredients = ({ handleOpen, data}) => {
           {data
             ?.filter((item) => item.type === "sauce")
             .map((element) => (
-                <li className={styles.Card} key={element.id } onClick={() => handleOpen(element)}>
-                  <img src={element.image} className={styles.Image} alt="ингредиент"></img>
-                  <div className={styles.Price}>
-                    {element.price}
-                    <CurrencyIcon />
-                   </div>
-                   <h3 className="text text_type_main-small">{element.name}</h3>
-                </li>
+              <li
+                className={styles.Card}
+                key={element.id}
+                onClick={() => handleOpenIngredients(element)}
+              >
+                <img
+                  src={element.image}
+                  className={styles.Image}
+                  alt="ингредиент"
+                ></img>
+                <div className={styles.Price}>
+                  {element.price}
+                  <CurrencyIcon />
+                </div>
+                <h3 className="text text_type_main-small">{element.name}</h3>
+              </li>
             ))}
         </ul>
         <p className="text text_type_main-medium mb-5">Начинка</p>
@@ -62,21 +79,31 @@ export const BurgerIngredients = ({ handleOpen, data}) => {
           {data
             ?.filter((item) => item.type === "main")
             .map((element) => (
-                <li className={styles.Card} key={element.id } onClick={() => handleOpen(element)} >
-                  <img src={element.image} className={styles.Image} alt="ингредиент"></img>
-                  <div className={styles.Price}>
-                    {element.price}
-                    <CurrencyIcon />
-                   </div>
-                   <h3 className="text text_type_main-small">{element.name}</h3>
-                </li>
-                
-            ))
-            
-            
-            }
+              <li
+                className={styles.Card}
+                key={element.id}
+                onClick={() => handleOpenIngredients(element)}
+              >
+                <img
+                  src={element.image}
+                  className={styles.Image}
+                  alt="ингредиент"
+                ></img>
+                <div className={styles.Price}>
+                  {element.price}
+                  <CurrencyIcon />
+                </div>
+                <h3 className="text text_type_main-small">{element.name}</h3>
+              </li>
+            ))}
         </ul>
       </div>
     </section>
   );
+}
+
+BurgerIngredients.propTypes = {
+    handleOpenIngredients: PropTypes.func,
+    data: PropTypes.array,
 };
+

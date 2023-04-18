@@ -1,25 +1,27 @@
 import styles from "./Modal.module.css";
+import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import { useEffect } from "react";
 
-export const Modal = ({ isOpen, handleClose, modalContent}) => {
-
+export const Modal = ({ handleClose, modalContent }) => {
   useEffect(() => {
-		document.addEventListener("keydown", (evt) => {
-			closeModalByEscape(evt);
-		});
-	});
-
-
-  function closeModalByEscape(evt) {
-    if (evt.key === "Escape") {
-      handleClose();
+    function closeByEscape(evt) {
+      if (evt.key === "Escape") {
+        handleClose();
+      }
     }
-  }
+    document.addEventListener("keydown", closeByEscape);
+    return () => {
+      document.removeEventListener("keydown", closeByEscape);
+    };
+  }, []);
 
-  return isOpen ? (
-    <div className={styles.Modal}>
-      <button onClick={handleClose} className={styles.Close}></button>
-      <div>{modalContent}</div>
-    </div>
-  ) : null;
+  return (
+    <>
+      <ModalOverlay handleClose={handleClose} modalContent={modalContent}/>
+      <div className={styles.Modal}>
+        <button onClick={handleClose} className={styles.Close}></button>
+        <div>{modalContent}</div>
+      </div>
+    </>
+  );
 };
