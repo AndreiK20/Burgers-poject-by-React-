@@ -6,8 +6,9 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerConstructor.module.css";
+import PropTypes from "prop-types";
 
-export function BurgerConstructor({ HandleOpenOrderDetails, data }) {
+export function BurgerConstructor({ handleOpenOrderDetails, data }) {
   const someBun = data?.filter((item) => item.type === "bun") ?? [];
   const elements = data?.filter((item) => item.type !== "bun") ?? [];
 
@@ -25,7 +26,7 @@ export function BurgerConstructor({ HandleOpenOrderDetails, data }) {
         </div>
         <div className={styles.Lists}>
           {elements.map((element) => (
-            <div className={styles.element}>
+            <div className={styles.Element}>
               <DragIcon type="primary" />
               <ConstructorElement
                 key={element?._id}
@@ -63,7 +64,7 @@ export function BurgerConstructor({ HandleOpenOrderDetails, data }) {
             <div className={styles.but}>
               {" "}
               <Button
-                onClick={HandleOpenOrderDetails}
+                onClick={handleOpenOrderDetails}
                 htmlType="button"
                 type="primary"
                 size="large"
@@ -77,3 +78,10 @@ export function BurgerConstructor({ HandleOpenOrderDetails, data }) {
     </section>
   );
 }
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.array,
+  handleOpenOrderDetails: PropTypes.func,
+};
+
+
