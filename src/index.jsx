@@ -2,10 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App/App';
+import { createStore } from 'redux';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') 
 );
+
+const reducer = ( state, action) => {
+
+}
+
+const store = createStore()
+
+
+
 root.render(
   <React.StrictMode>
     <App />
