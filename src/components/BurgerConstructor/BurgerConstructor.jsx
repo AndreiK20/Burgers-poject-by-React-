@@ -8,13 +8,36 @@ import {
 import styles from "./BurgerConstructor.module.css";
 import PropTypes from "prop-types";
 
-export function BurgerConstructor({ handleOpenOrderDetails, data }) {
-  const someBun = data?.filter((item) => item.type === "bun") ?? [];
-  const elements = data?.filter((item) => item.type !== "bun") ?? [];
+import { useDrop } from "react-dnd";
+
+export function BurgerConstructor({ handleOpenOrderDetails, data}) {
+   const someBun = data?.filter((item) => item.type === "bun") ?? [];
+   const elements = data?.filter((item) => item.type !== "bun") ?? [];
+
+  // // drug drop section
+  // const [{ isHover }, drop] = useDrop({
+  //   accept: "ingredients",
+  //   collect: (monitor) => ({
+  //     isHover: monitor.isOver(),
+  //   }),
+  //   drop(item) {
+  //     //dispatch(setIngredientToBurger(item));
+  //   },
+  // });
+  // // drug drop section
+
+  // ////////////
+  // const borderColor = isHover ? "lightgreen" : "transparent";
+
+  // /////////////
 
   return (
     <section className={styles.Section}>
-      <div className={styles.Column}>
+      <div
+        className={styles.Column}
+        // style={{ border: `1px solid ${borderColor}` }}
+        // ref={drop}
+      >
         <div className={styles.ElementUp}>
           <ConstructorElement
             key={someBun[0]?._id}
@@ -52,11 +75,7 @@ export function BurgerConstructor({ handleOpenOrderDetails, data }) {
         <div className={`${styles.Price} ${" mt-10 mr-4"}`}>
           <span>
             {" "}
-            <span
-              className=" text text_type_digits-medium mr-2"
-            >
-              666
-            </span>
+            <span className=" text text_type_digits-medium mr-2">666</span>
             <CurrencyIcon type="primary" />
           </span>
 
@@ -79,9 +98,7 @@ export function BurgerConstructor({ handleOpenOrderDetails, data }) {
   );
 }
 
-BurgerConstructor.propTypes = {
+/* BurgerConstructor.propTypes = {
   data: PropTypes.array,
   handleOpenOrderDetails: PropTypes.func,
-};
-
-
+}; */

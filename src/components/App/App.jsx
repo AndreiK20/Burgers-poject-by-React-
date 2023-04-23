@@ -7,6 +7,15 @@ import { Modal } from "../Modal/Modal";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
 
+import { useSelector, useDispatch } from "react-redux";
+import { fetchData } from "../../services/action/ingredients";
+import { getElementsFromAPISelector } from "../../services/action/selectors/getElementsFromAPISelector"; 
+
+
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
+
 const burgerLink = "https://norma.nomoreparties.space/api/ingredients";
 
 function App() {
@@ -15,7 +24,17 @@ function App() {
   const [modalContent, setModalContent] = useState();
 
 
+
+ const dispatch = useDispatch();
+
+
+
   useEffect(() => {
+  dispatch(fetchData());
+  }, [dispatch]);
+
+
+/*   useEffect(() => {
     fetch(burgerLink)
       .then((res) => {
         if (res.ok) {
@@ -24,7 +43,7 @@ function App() {
         return Promise.reject(`Ошибка ${res.status}`);
       })
       .then((res) => setIngredients(res.data))
-  }, []);
+  }, []); */
 
   const handleOpenIngredients = (element) => {
     setIsOpen(true);
@@ -38,16 +57,15 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <DndProvider backend={HTML5Backend}>
+      <div className="App">
       <AppHeader />
       <main className={styles.General}>
         <div className={styles.Center}>
           <BurgerIngredients
             handleOpenIngredients={handleOpenIngredients}
-            data={ingredients}
           />
           <BurgerConstructor
-            data={ingredients}
             handleOpenOrderDetails={handleOpenOrderDetails}
           />
         </div>
@@ -60,7 +78,46 @@ function App() {
         )}
       </main>
     </div>
+    </DndProvider>
+    
   );
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+/* return (
+  <>
+    <DndProvider backend={HTML5Backend}>
+      {dataRequest ? (
+        <Loading />
+      ) : (
+        <>
+          <div className={stylesApp.topBox}>
+            <AppHeader />
+            <main className={stylesApp.box}>
+              <BurgerIngredients
+                isOpen={isOpen}
+                handleOpenModal={handleOpenModal}
+                handleCloseModal={handleCloseModal}
+              />
+              <BurgerConstructor
+                isOpen={isOpen}
+                handleOpenModal={handleOpenModal}
+                handleCloseModal={handleCloseModal}
+              />
+            </main>
+          </div>
+        </>
+      )}
+    </DndProvider>
+  </>
+);
+} */

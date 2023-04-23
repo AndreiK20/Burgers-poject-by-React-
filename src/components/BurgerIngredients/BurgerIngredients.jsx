@@ -2,10 +2,36 @@ import { useState } from "react";
 import styles from "./BurgerIngredients.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { getElementsFromAPISelector } from "../../services/action/selectors/getElementsFromAPISelector";
 
-export function BurgerIngredients({ handleOpenIngredients, data }) {
+import { useDrag } from "react-dnd";
+
+export function BurgerIngredients({ handleOpenIngredients }) {
   const [current, setCurrent] = useState("one");
+
+  const { data, dataRequest, dataFailed } = useSelector(
+    getElementsFromAPISelector
+  );
+
+  /*   arrayOdelementsFromAPI.map((element)=>{
+
+    // отрисовать этот элемент в burgerConstructor
+    // на каждый элемент навесить хук useDrag и передать туда element
+
+  // вынести все что отрисовывается(элемент) в отдельный компонент 
+
+  }) */
+
+  //drag
+  const [{ isDrag }, dragRef] = useDrag({
+    type: "ingredients",
+    item: { ...ingredient },
+    collect: (monitor) => ({
+      isDrag: monitor.isDragging(),
+    }),
+  });
+  //drag
 
   return (
     <section className={styles.Main}>
@@ -19,11 +45,7 @@ export function BurgerIngredients({ handleOpenIngredients, data }) {
         <Tab value="two" active={current === "two"} onClick={setCurrent}>
           Соусы
         </Tab>
-        <Tab
-          value="three"
-          active={current === "three"}
-          onClick={setCurrent}
-        >
+        <Tab value="three" active={current === "three"} onClick={setCurrent}>
           Начинка
         </Tab>
       </div>
@@ -32,22 +54,7 @@ export function BurgerIngredients({ handleOpenIngredients, data }) {
         <ul className={styles.Type}>
           {(data?.filter((item) => item.type === "bun") ?? []).map(
             (element) => (
-              <li
-                className={styles.Card}
-                key={element._id}
-                onClick={() => handleOpenIngredients(element)}
-              >
-                <img
-                  src={element.image}
-                  className={styles.Image}
-                  alt="ингредиент"
-                ></img>
-                <div className={styles.Price}>
-                  {element.price}
-                  <CurrencyIcon />
-                </div>
-                <h3 className="text text_type_main-small">{element.name}</h3>
-              </li>
+              <BurgerIngredient ingredient={element} key={element._id} />
             )
           )}
         </ul>
@@ -56,22 +63,7 @@ export function BurgerIngredients({ handleOpenIngredients, data }) {
           {data
             ?.filter((item) => item.type === "sauce")
             .map((element) => (
-              <li
-                className={styles.Card}
-                key={element.id}
-                onClick={() => handleOpenIngredients(element)}
-              >
-                <img
-                  src={element.image}
-                  className={styles.Image}
-                  alt="ингредиент"
-                ></img>
-                <div className={styles.Price}>
-                  {element.price}
-                  <CurrencyIcon />
-                </div>
-                <h3 className="text text_type_main-small">{element.name}</h3>
-              </li>
+              <BurgerIngredient ingredient={element} key={element._id} />
             ))}
         </ul>
         <p className="text text_type_main-medium mb-5">Начинка</p>
@@ -79,22 +71,7 @@ export function BurgerIngredients({ handleOpenIngredients, data }) {
           {data
             ?.filter((item) => item.type === "main")
             .map((element) => (
-              <li
-                className={styles.Card}
-                key={element.id}
-                onClick={() => handleOpenIngredients(element)}
-              >
-                <img
-                  src={element.image}
-                  className={styles.Image}
-                  alt="ингредиент"
-                ></img>
-                <div className={styles.Price}>
-                  {element.price}
-                  <CurrencyIcon />
-                </div>
-                <h3 className="text text_type_main-small">{element.name}</h3>
-              </li>
+              <BurgerIngredient ingredient={element} key={element._id} />
             ))}
         </ul>
       </div>
@@ -102,8 +79,52 @@ export function BurgerIngredients({ handleOpenIngredients, data }) {
   );
 }
 
-BurgerIngredients.propTypes = {
-    handleOpenIngredients: PropTypes.func,
-    data: PropTypes.array,
-};
 
+/* 
+return (
+  <>
+    <div
+      className={`${styles.scrollContainer} custom-scroll`}
+      onScroll={handleOnscroll}
+      ref={scrollContainerRef}
+    >
+      <p className="text text_type_main-medium">Булки</p>
+      <ul className={styles.container}>
+        {elements.map((element) => {
+          if (element.type === "bun") {
+            return (
+              <BurgerIngredient ingredient={element} key={element._id} />
+            );
+          }
+        })}
+        <div ref={one}></div>
+      </ul>
+      <p className="text text_type_main-medium">Соусы</p>
+      <ul className={styles.container}>
+        {elements.map((element) => {
+          if (element.type === "sauce") {
+            return (
+              <BurgerIngredient ingredient={element} key={element._id} />
+            );
+          }
+        })}
+        <div ref={two}></div>
+      </ul>
+      <p className="text text_type_main-medium" ref={three}>
+        Начинки
+      </p>
+      <ul className={styles.container}>
+        {elements.map((element) => {
+          if (element.type === "main") {
+            return (
+              <BurgerIngredient ingredient={element} key={element._id} />
+            );
+          }
+        })}
+      </ul>
+      <div ref={three}></div>
+    </div>
+  </>
+);
+}
+ */
