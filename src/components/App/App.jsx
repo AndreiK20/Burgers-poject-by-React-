@@ -3,14 +3,9 @@ import styles from "./App.module.css";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
-import { Modal } from "../Modal/Modal";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
-import { OrderDetails } from "../OrderDetails/OrderDetails";
-
 import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "../../services/action/ingredients";
-import { getElementsFromAPISelector } from "../../services/action/selectors/getElementsFromAPISelector";
-
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 

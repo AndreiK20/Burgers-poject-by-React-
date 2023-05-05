@@ -96,7 +96,7 @@ export function BurgerConstructor() {
     const data = bun
       ? bun.price * 2 +
         elements.reduce((acc, item) => acc + item.price, 0)
-      : elements.reduce((acc, item) => acc + item.price, 0);
+      : elements.reduce((acc, item) => acc + item.price, 0)
     return data;
   };
   
@@ -104,7 +104,7 @@ export function BurgerConstructor() {
     return getFinalPrice(elements, bun);
   }, [elements, bun]);  
   
-  const borderColor = isHover ? "lightgreen" : "transparent";
+  const borderColor = isHover ? "lightgreen" : "transparent"
   return (
     <>
     <section className={styles.Section}>
@@ -178,7 +178,7 @@ export function BurgerConstructor() {
         <Modal header={""} onClose={onClose}>
           <OrderDetails />
         </Modal>
-      )};
+      )}
     </>
   );
 }
