@@ -19,7 +19,7 @@ export function fetchData() {
           type: GET_REQUEST_SUCCESS,
           data: result.data,
         });
-      }, 1000);
+      });
     } catch (err) {
       dispatch({
         type: GET_REQUEST_FAILED,

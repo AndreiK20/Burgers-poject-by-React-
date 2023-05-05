@@ -1,27 +1,41 @@
 import styles from "./Modal.module.css";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 
-export const Modal = ({ handleClose, modalContent }) => {
+
+
+export const Modal = (props) => {
+  const { header, onClose } = props;
+
+  function handleCloseButtonClick() {
+    onClose();
+  }
+
+
   useEffect(() => {
     function closeByEscape(evt) {
       if (evt.key === "Escape") {
-        handleClose();
+        onClose();
       }
     }
     document.addEventListener("keydown", closeByEscape);
     return () => {
-      document.removeEventListener("keydown", closeByEscape);
+    document.removeEventListener("keydown", closeByEscape);
     };
   }, []);
 
-  return (
+  return  (
     <>
-      <ModalOverlay handleClose={handleClose} modalContent={modalContent}/>
+      <ModalOverlay onClose={onClose} />
       <div className={styles.Modal}>
-        <button onClick={handleClose} className={styles.Close}></button>
-        <div>{modalContent}</div>
+        <button onClick={handleCloseButtonClick} className={styles.Close}></button>
+        <div>{props.children}</div>
       </div>
     </>
-  );
+  )
+}
+Modal.propTypes = {
+  children: PropTypes.element.isRequired,
+  header: PropTypes.string,
 };

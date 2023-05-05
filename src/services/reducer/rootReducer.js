@@ -4,11 +4,11 @@ import { currentIngredientReducer } from "./currentIngredient";
 import { selectedIngredientsReducer } from "./selectedIngredients";
 import { orderDetailsReducer } from "./orderDetails";
 
-const rootReducer = combineReducers({
+const reducer = combineReducers({
   ingredientsFromAPI: ingredientsReducer,
   currentIngredients: currentIngredientReducer,
   selectedItems: selectedIngredientsReducer,
   order: orderDetailsReducer,
 });
 
-export default rootReducer;
+export default reducer;

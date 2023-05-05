@@ -9,5 +9,3 @@ export const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 );
 
-
-//composeWithDevTools(applyMiddleware(thunk, logBunsMiddleware))

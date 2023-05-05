@@ -7,3 +7,15 @@ export const getTotalPriceSelector = (state) => {
   }, 0);
   return totalPrice;
 };
+
+const getFinalPrice = (ingredients, bun) => {
+  const data = bun
+    ? bun.price * 2 +
+      ingredients.reduce((acc, item) => acc + item.price, 0)
+    : ingredients.reduce((acc, item) => acc + item.price, 0);
+  return data;
+};
+
+const finalPrice = useMemo(() => {
+  return getFinalPrice(ingredients, bun);
+}, [ingredients, bun]);

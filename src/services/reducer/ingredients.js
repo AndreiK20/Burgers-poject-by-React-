@@ -24,11 +24,10 @@ import {
       case GET_REQUEST_SUCCESS: {
         return {
           ...state,
-  
           data: action.data.map((item) => ({
             ...item,
             board: "default",
-            count: 0, // нужна ли?
+            count: 0, 
           })),
   
           dataRequest: false,
@@ -37,7 +36,6 @@ import {
       case GET_REQUEST_FAILED: {
         return {
           ...state,
-         
           dataFailed: true,
           dataRequest: false,
         };
