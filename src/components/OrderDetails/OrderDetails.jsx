@@ -1,6 +1,6 @@
 import styles from "./OrderDetails.module.css";
 import flag from "../../Images/graphics.svg";
-import { getOrderNumberSelector } from "../../services/action/selectors/getOrderNumberSelector";
+import { getOrderNumberSelector } from "../../services/selectors/getOrderNumberSelector";
 import { useSelector } from "react-redux";
 
 export const OrderDetails = () => {

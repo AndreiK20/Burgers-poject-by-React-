@@ -6,7 +6,7 @@ export const IngredientDetails = ({ingredient }) => {
   return (
     <div className={styles.Component}>
       <h2 className={`  ${styles.Title} ${"text text_type_main-large"}`}> Детали Ингридиента</h2>
-      <img src={ingredient.image} alt="картинка ингредиента"></img>
+      <img className={styles.Image} src={ingredient.image_large} alt={ingredient.name}></img>
       <p className="text text_type_main-medium">{ingredient.name}</p>
       <ul
         className={`${ styles.Inform}  ${"text text_type_main-small mt-8 pb-15"}`}>

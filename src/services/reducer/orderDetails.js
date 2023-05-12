@@ -1,9 +1,11 @@
 import { SET_ORDER, DELETE_ORDER } from "../constans/constants";
 
+
 const initialState = {
   name: "",
   orderNumber: "",
 };
+
 
 export const orderDetailsReducer = (state = initialState, action) => {
   switch (action.type) {

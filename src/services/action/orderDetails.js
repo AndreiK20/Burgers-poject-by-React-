@@ -1,7 +1,8 @@
 import { SET_ORDER, DELETE_ORDER } from "../constans/constants";
+import { postNewOrder } from "../../services/api";
 
 // action creators
-export const setCurrentOder = (response) => {
+const setCurrentOder = (response) => {
   const dataForInitialState = {
     name: response.name,
     orderNumber: response.order.number,
@@ -24,3 +25,18 @@ export const deleteCurrentOder = () => {
     data: dataForInitialState,
   };
 };
+
+
+export function postOrder(ingredientsForPostAPI) {
+  return async (dispatch) => {
+      try{
+        const response = await postNewOrder(ingredientsForPostAPI);
+      if (response.success) {
+        dispatch(setCurrentOder(response));
+      }
+      } catch (err) {
+        console.log(err)
+      } finally {
+      }
+  };
+}

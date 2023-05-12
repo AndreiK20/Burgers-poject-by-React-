@@ -43,11 +43,17 @@ import {
         };
       }
   
+
       case INGREDIENT_TO_BURGER_UPDATE: {
-        console.log(INGREDIENT_TO_BURGER_UPDATE);
+        const currentBuns = state.selectedIngredients.filter(
+          (ingredient) => ingredient.type === "bun"
+        );
+  
+        const updatedIngredients = action.data;
+  
         return {
           ...state,
-          selectedIngredients: action.data,
+          selectedIngredients: [...currentBuns, ...updatedIngredients],
         };
       }
   
@@ -56,3 +62,5 @@ import {
       }
     }
   };
+
+  

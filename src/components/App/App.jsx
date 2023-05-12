@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import styles from "./App.module.css";
+import { useState, useEffect } from "react";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
@@ -8,13 +8,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchData } from "../../services/action/ingredients";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { getElementsFromAPISelector } from "../../services/selectors/getElementsFromAPISelector";
+
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [modalContent, setModalContent] = useState();
 
+  
   const dispatch = useDispatch();
+
+  const { data, dataRequest, dataFailed } = useSelector(
+    getElementsFromAPISelector
+  );
+ 
 
   useEffect(() => {
     dispatch(fetchData());
@@ -32,11 +39,11 @@ function App() {
       .then((res) => setIngredients(res.data))
   }, []); */
 
-  const handleOpenIngredients = (element) => {
-    setIsOpen(true);
-    setModalContent(<IngredientDetails data={element} />);
-  };
-  const handleClose = () => setIsOpen(false);
+  // const handleOpenIngredients = (element) => {
+  //   setIsOpen(true);
+  //   setModalContent(<IngredientDetails data={element} />);
+  // };
+  // const handleClose = () => setIsOpen(false);
 
   // const handleOpenOrderDetails = () => {
   //   setIsOpen(true);
@@ -44,17 +51,24 @@ function App() {
   // };
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <>
+    {dataRequest  ?  (
+      <h2>....Loading</h2>
+    ) : (
       <div className="App">
         <AppHeader />
         <main className={styles.General}>
           <div className={styles.Center}>
+          <DndProvider backend={HTML5Backend}>
             <BurgerIngredients />
             <BurgerConstructor />
+          </DndProvider>
           </div>
         </main>
       </div>
-    </DndProvider>
+    )
+  }
+  </>
   );
 }
 

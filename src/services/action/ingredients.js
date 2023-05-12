@@ -1,4 +1,4 @@
-import { getRequest } from "../api/index";
+import { getIngredients } from "../api"; 
 
 import {
   GET_REQUEST,
@@ -12,7 +12,7 @@ export function fetchData() {
       type: GET_REQUEST,
     });
     try {
-      const result = await getRequest();
+      const result = await getIngredients();
 
       setTimeout(() => {
         dispatch({

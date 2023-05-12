@@ -1,7 +1,7 @@
 import { config } from "../constans/constants";
 import { checkResponse } from "../utils/utils";
 
-export async function getRequest() {
+export async function getIngredients() {
   const result = await fetch(`${config.baseUrl}/ingredients`, {
     method: "GET",
     headers: config.headers,
@@ -18,11 +18,5 @@ export async function postNewOrder(ingredients) {
   return await checkResponse(result);
 }
 
-/* 
-// Эндпоинт
-// POST https://norma.nomoreparties.space/api/orders
 
-// Тело запроса
-{ 
-  "ingredients": ["609646e4dc916e00276b286e","609646e4dc916e00276b2870"]
-} */
+

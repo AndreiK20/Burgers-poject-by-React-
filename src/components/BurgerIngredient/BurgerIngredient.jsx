@@ -2,15 +2,13 @@ import styles from "./BurgerIngredient.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { setCurrentIngredient } from "../../services/action/currentIngradients";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteCurrentIngredient } from "../../services/action/currentIngradients";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
 import PropTypes from "prop-types";
 
 
 
-export function BurgerIngredient({ingredient}) {
-
+export function BurgerIngredient({ingredient, id}) {
   const dispatch = useDispatch();
 
   const [{ isDrag }, dragRef] = useDrag({
@@ -21,38 +19,38 @@ export function BurgerIngredient({ingredient}) {
     }),
   });
 
+  
+
+
   function handleOnclick() {
     dispatch(setCurrentIngredient(ingredient));
   }
 
  
-
-
   
-  const view = (
+  return (
     <>
-      <li
+      <div
         className={styles.Card}
         key={ingredient.id}
         onClick={handleOnclick}
-        ref={dragRef}
       >
-       {ingredient.count > 0 && <Counter/>}
+        {ingredient.count > 0 && <Counter count={ingredient.count} />}
         <img
           src={ingredient.image}
           className={styles.Image}
-          alt="ингредиент"
+          alt={ingredient.name}
+          ref={dragRef}
         ></img>
         <div className={styles.Price}>
           {ingredient.price}
           <CurrencyIcon />
         </div>
         <h3 className="text text_type_main-small">{ingredient.name}</h3>
-      </li>
+      </div>
     </>
   );
 
-  return view;
 }
 
 
