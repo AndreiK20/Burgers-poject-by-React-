@@ -18,7 +18,6 @@ import { updateSelectedElements } from "../../services/action/selectedIngredient
 import { getIngredientsForPostAPISelector } from "../../services/selectors/getIngredientsForPostAPISelector";
 import { getOrderNumberSelector } from "../../services/selectors/getOrderNumberSelector";
 import { postOrder } from "../../services/action/orderDetails";
-import PropTypes from "prop-types";
 
 export function BurgerConstructor() {
   const selectedElements = useSelector(getSelectedElementsSelector);
@@ -163,7 +162,3 @@ export function BurgerConstructor() {
   );
 }
 
-BurgerConstructor.propTypes = {
-  data: PropTypes.array,
-  handleOpenOrderDetails: PropTypes.func,
-};

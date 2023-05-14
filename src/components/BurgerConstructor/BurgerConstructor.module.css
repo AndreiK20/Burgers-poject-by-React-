@@ -26,10 +26,26 @@
 .Lists {
   position: relative;
   display: flex;
+  overflow: auto;
   flex-direction: column;
-  max-height: 440px;
-  overflow-y: scroll;
+  max-height: 464px;
+  /* overflow-y: scroll; */
   text-decoration: none;
+}
+
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background-color: none;
+	border: 3px solid #8585ad;
+}
+
+::-webkit-scrollbar-thumb {
+	height: 292px;
+	border: 3px solid #8585ad;
+	background: #8585ad;
 }
 
 .Element {

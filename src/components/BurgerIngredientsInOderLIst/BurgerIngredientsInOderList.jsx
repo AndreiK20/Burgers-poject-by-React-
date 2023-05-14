@@ -5,6 +5,7 @@ import { useDrag, useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
 
 export function BurgerIngredientsInOderList({ element, index, moveCard }) {
   const dispatch = useDispatch();
@@ -97,3 +98,9 @@ export function BurgerIngredientsInOderList({ element, index, moveCard }) {
     </li>
   );
 }
+
+BurgerIngredientsInOderList.propTypes = {
+	index: PropTypes.number.isRequired,
+	element: PropTypes.object.isRequired,
+  moveCard: PropTypes.func.isRequired
+};

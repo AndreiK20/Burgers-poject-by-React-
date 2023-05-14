@@ -4,7 +4,6 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Modal } from "../Modal/Modal";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 import { useSelector, useDispatch } from "react-redux";
-import { getElementsFromAPISelector } from "../../services/selectors/getElementsFromAPISelector";
 import { getCurrentIngredientsSelector } from "../../services/selectors/getCurrentIngredientsSelector";
 import { deleteCurrentIngredient } from "../../services/action/currentIngradients";
 import { BurgerIngredient } from "../BurgerIngredient/BurgerIngredient";

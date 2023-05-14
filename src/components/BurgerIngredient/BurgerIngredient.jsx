@@ -29,10 +29,8 @@ export function BurgerIngredient({ingredient, id}) {
  
   
   return (
-    <>
       <div
         className={styles.Card}
-        key={ingredient.id}
         onClick={handleOnclick}
       >
         {ingredient.count > 0 && <Counter count={ingredient.count} />}
@@ -48,7 +46,6 @@ export function BurgerIngredient({ingredient, id}) {
         </div>
         <h3 className="text text_type_main-small">{ingredient.name}</h3>
       </div>
-    </>
   );
 
 }
