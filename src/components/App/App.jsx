@@ -1,52 +1,74 @@
-import { useState, useEffect } from "react";
 import styles from "./App.module.css";
-import { AppHeader } from "../AppHeader/AppHeader"; 
+import { useState, useEffect } from "react";
+import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
-import { Modal } from "../Modal/Modal";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
-import { OrderDetails } from "../OrderDetails/OrderDetails";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchData } from "../../services/action/ingredients";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { getElementsFromAPISelector } from "../../services/selectors/getElementsFromAPISelector";
 
-
-const burgerLink = "https://norma.nomoreparties.space/api/ingredients";
 
 function App() {
-  const [ingredients, setIngredient] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [modalContent, setModalContent] = useState();
+
+  
+  const dispatch = useDispatch();
+
+  const { data, dataRequest, dataFailed } = useSelector(
+    getElementsFromAPISelector
+  );
+ 
 
   useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
+  // const burgerLink = "https://norma.nomoreparties.space/api/ingredients";
+  /*   useEffect(() => {
     fetch(burgerLink)
-      .then((res) => res.json())
-      .then((res) => setIngredient(res.data));
-  }, []);
-  const handleOpenIngredients = (element) => {
-    setIsOpen(true)
-    setModalContent(<IngredientDetails data={element} />)
-    ;}
-  const handleClose = () => setIsOpen(false);
-   
-  const handleOpenOrderDetails = () => {
-    setIsOpen(true)
-    setModalContent(<OrderDetails/>)
-  }
-  
-  
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка ${res.status}`);
+      })
+      .then((res) => setIngredients(res.data))
+  }, []); */
+
+  // const handleOpenIngredients = (element) => {
+  //   setIsOpen(true);
+  //   setModalContent(<IngredientDetails data={element} />);
+  // };
+  // const handleClose = () => setIsOpen(false);
+
+  // const handleOpenOrderDetails = () => {
+  //   setIsOpen(true);
+  //   setModalContent(<OrderDetails />);
+  // };
 
   return (
-    <div className="App">
-      <AppHeader />
-      <main className={styles.General}>
-        <div className={styles.Center}>
-          <BurgerIngredients
-            handleOpenIngredients={handleOpenIngredients}
-            data={ingredients}
-          />
-          <BurgerConstructor data={ingredients} handleOpenOrderDetails={handleOpenOrderDetails} />
-        </div>
-        {isOpen && <Modal isOpen={isOpen} handleClose={handleClose} modalContent={modalContent}/> }
-      </main>
-    </div>
+    <>
+    {dataRequest  ?  (
+      <h2>....Loading</h2>
+    ) : (
+      <div className="App">
+        <AppHeader />
+        <main className={styles.General}>
+          <div className={styles.Center}>
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
+          </div>
+        </main>
+      </div>
+    )
+  }
+  </>
   );
 }
 

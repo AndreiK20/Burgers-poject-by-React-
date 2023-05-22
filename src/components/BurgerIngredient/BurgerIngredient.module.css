@@ -15,46 +15,26 @@
   margin-bottom: 40px;
 }
 
-
-
 .Ingridients {
   height: 800px;
-  width: 664px;
+  width: 600px;
   display: flex;
-  overflow: auto;
-  text-decoration: none;
   flex-direction: column;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
+  text-decoration: none;
 }
 
-
-::-webkit-scrollbar {
-	width: 8px;
-}
-
-::-webkit-scrollbar-track {
-	background-color: none;
-	border: 3px solid #8585ad;
-}
-
-::-webkit-scrollbar-thumb {
-	height: 492px;
-	border: 3px solid #8585ad;
-	background: #8585ad;
-}
-
-
-.Individual {
+.Type {
   display: flex;
   justify-content: space-between;
   min-width: 568px;
   flex-wrap: wrap;
+  text-decoration: none;
   row-gap: 24px;
   padding-left: 0;
-  text-decoration: none;
-  list-style-type: none
 }
 .Card {
+  position: relative;
   width: 272px;
   display: flex;
   flex-direction: column;
@@ -62,7 +42,6 @@
   justify-items: center;
   text-decoration: none;
   margin-bottom: 40px;
-  border: 1px solid red;
 }
 
 .Price {
@@ -70,6 +49,6 @@
   align-items: center;
   gap: 5px;
 }
-.Image:hover{
+.Image:hover {
   cursor: pointer;
 }
