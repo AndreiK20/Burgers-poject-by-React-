@@ -30,7 +30,7 @@ export const AppHeader = () => {
             <Logo />
           </li>
           <li className={styles.List}>
-            <a href="#" className={styles.Item}>
+            <a href="/privat" className={styles.Item}>
               <ProfileIcon />
               <p className={"text text_type_main-default"}>
                 Личный кабинет
